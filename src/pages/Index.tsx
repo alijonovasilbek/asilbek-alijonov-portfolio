@@ -4,6 +4,10 @@ import { useTypingEffect, useScrollReveal, useMouseParallax } from "@/hooks/useA
 import FloatingOrbs from "@/components/FloatingOrbs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SkillsSection from "@/components/SkillsSection";
+import GitHubStatsSection from "@/components/GitHubStatsSection";
+import AchievementsSection from "@/components/AchievementsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 
 import projectCrm from "@/assets/project-crm.png";
 import projectOlou from "@/assets/project-olou.jpg";
@@ -205,6 +209,18 @@ const Index = () => {
           </Link>
         </div>
       </section>
+
+      {/* SKILLS */}
+      <SkillsSection />
+
+      {/* GITHUB STATS */}
+      <GitHubStatsSection />
+
+      {/* ACHIEVEMENTS */}
+      <AchievementsSection />
+
+      {/* TESTIMONIALS */}
+      <TestimonialsSection />
 
       {/* CTA */}
       <section className="py-24 md:py-32 px-6">
