@@ -1,29 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
-export const useScrollAnimation = () => {
+export const useScrollReveal = () => {
   useEffect(() => {
+    const elements = document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale");
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-slide-up");
-            entry.target.classList.remove("opacity-0");
+            const delay = entry.target.getAttribute("data-delay") || "0";
+            setTimeout(() => {
+              entry.target.classList.add("visible");
+            }, parseInt(delay));
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
 
-    document.querySelectorAll("[data-animate]").forEach((el) => {
-      el.classList.add("opacity-0");
-      observer.observe(el);
-    });
-
+    elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 };
 
-export const useTypingEffect = (texts: string[], speed = 80, pause = 2000) => {
+export const useTypingEffect = (texts: string[], speed = 70, pause = 2500) => {
   const [displayText, setDisplayText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -31,27 +31,25 @@ export const useTypingEffect = (texts: string[], speed = 80, pause = 2000) => {
 
   useEffect(() => {
     const currentText = texts[textIndex];
-
     const timeout = setTimeout(
       () => {
         if (!isDeleting) {
           setDisplayText(currentText.slice(0, charIndex + 1));
-          setCharIndex((prev) => prev + 1);
+          setCharIndex((p) => p + 1);
           if (charIndex + 1 === currentText.length) {
             setTimeout(() => setIsDeleting(true), pause);
           }
         } else {
           setDisplayText(currentText.slice(0, charIndex - 1));
-          setCharIndex((prev) => prev - 1);
+          setCharIndex((p) => p - 1);
           if (charIndex <= 1) {
             setIsDeleting(false);
-            setTextIndex((prev) => (prev + 1) % texts.length);
+            setTextIndex((p) => (p + 1) % texts.length);
           }
         }
       },
       isDeleting ? speed / 2 : speed
     );
-
     return () => clearTimeout(timeout);
   }, [charIndex, isDeleting, textIndex, texts, speed, pause]);
 
@@ -68,14 +66,30 @@ export const useDarkMode = () => {
     document.documentElement.classList.toggle("dark", dark);
   }, []);
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     setIsDark((prev) => {
       const next = !prev;
       document.documentElement.classList.toggle("dark", next);
       localStorage.setItem("theme", next ? "dark" : "light");
       return next;
     });
-  };
+  }, []);
 
   return { isDark, toggle };
+};
+
+export const useMouseParallax = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      setPosition({ x, y });
+    };
+    window.addEventListener("mousemove", handler);
+    return () => window.removeEventListener("mousemove", handler);
+  }, []);
+
+  return position;
 };
