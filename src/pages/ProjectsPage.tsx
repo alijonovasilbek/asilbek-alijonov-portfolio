@@ -34,7 +34,7 @@ const projects = [
     description: "Kurs boshqaruv tizimi — o'quvchilar, to'lovlar, davomat, hisobotlar va moliyaviy tahlil. 1000+ foydalanuvchi.",
     image: projectBunyodkor,
     tech: ["Django", "FastAPI", "PostgreSQL", "Tailwind"],
-    live: "https://bunyodkor.cognilabs.org",
+    live: "#",
     github: "#",
     category: "Web App",
     featured: true,
@@ -122,7 +122,7 @@ const FeaturedCard = ({ project }: { project: typeof projects[0] }) => {
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setTilt({ x: 0, y: 0 })}
       style={{
-        transform: `perspective(1200px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
+        transform: window.matchMedia("(hover: none)").matches ? "none" : `perspective(1200px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
         transition: "transform 0.2s ease-out",
       }}
       className="reveal-scale group relative overflow-hidden rounded-3xl border border-border shadow-sm"
@@ -203,7 +203,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setTilt({ x: 0, y: 0 })}
       style={{
-        transform: `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
+        transform: window.matchMedia("(hover: none)").matches ? "none" : `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
         transition: "transform 0.15s ease-out",
         background: "hsl(var(--card))",
       }}
@@ -277,7 +277,7 @@ const ProjectsPage = () => {
             <span className="gradient-text">Loyihalarim</span>
           </h1>
           <p className="reveal text-muted-foreground max-w-xl text-sm md:text-base" data-delay="200">
-            Real mijozlar uchun yaratilgan {projects.length} ta loyiha — CRM tizimlaridan Telegram botlargacha.
+            Real mijozlar uchun yaratilgan 15+ ta loyiha — CRM tizimlaridan Telegram botlargacha.
           </p>
         </div>
       </section>

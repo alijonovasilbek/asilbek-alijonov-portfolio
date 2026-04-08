@@ -139,7 +139,7 @@ const CTASection = () => {
             <div className="mt-12 pt-8 border-t border-border grid grid-cols-3 gap-4">
               {[
                 { num: "2+", label: "Yil tajriba" },
-                { num: "6+", label: "Loyiha" },
+                { num: "15+", label: "Loyiha" },
                 { num: "100%", label: "Sifat" },
               ].map((s) => (
                 <div key={s.label}>

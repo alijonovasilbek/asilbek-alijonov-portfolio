@@ -128,7 +128,7 @@ const Index = () => {
             <div className="reveal grid grid-cols-3 gap-4" data-delay="300">
               {[
                 { num: "2+", label: "Yil tajriba" },
-                { num: "6+", label: "Loyihalar" },
+                { num: "15+", label: "Loyihalar" },
                 { num: "5+", label: "Texnologiyalar" },
               ].map((s) => (
                 <div key={s.label} className="text-center glass-card p-4 rounded-xl">
