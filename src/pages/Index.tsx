@@ -177,14 +177,14 @@ const Index = () => {
               <Link
                 to="/projects"
                 key={p.title}
-                className="reveal-scale group glass-card overflow-hidden hover:scale-[1.02] transition-all duration-500 glow-hover"
+                className="reveal-scale group overflow-hidden hover:scale-[1.02] transition-all duration-500 glow-hover rounded-2xl border border-border" style={{background: "hsl(var(--card))"}}
                 data-delay={String(i * 150)}
               >
-                <div className="relative overflow-hidden aspect-[16/9]">
+                <div className="relative overflow-hidden" style={{height: "200px"}}>
                   <img
                     src={p.image}
                     alt={p.title}
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-cover object-top"
                     loading="lazy"
                     decoding="async"
                     width={1280}

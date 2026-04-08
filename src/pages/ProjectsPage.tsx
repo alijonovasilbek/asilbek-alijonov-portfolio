@@ -12,6 +12,7 @@ import projectCleaning from "@/assets/project-cleaning.png";
 import projectOlou from "@/assets/project-olou.jpg";
 import projectTaxi from "@/assets/project-taxi.jpg";
 import projectWebapp from "@/assets/project-webapp.jpg";
+import projectBonAppetit from "@/assets/project-bonappetit.png";
 
 const categories = ["Barchasi", "Web App", "E-commerce", "Bot", "Website"];
 
@@ -77,15 +78,15 @@ const projects = [
     num: "05",
   },
   {
-    title: "Telegram Web App",
-    description: "Telegram Mini App — interaktiv foydalanuvchi interfeysi, WebSocket real-time aloqa.",
-    image: projectWebapp,
+    title: "Bon Appétit",
+    description: "Telegram Web App orqali onlayn ovqat buyurtma tizimi — menyu, savatcha, buyurtmalar va real-time yetkazib berish.",
+    image: projectBonAppetit,
     tech: ["Python", "Telegram Bot API", "FastAPI", "WebSocket"],
-    live: "#",
+    live: "https://t.me/Onlineovqatzakazbot",
     github: "#",
     category: "Bot",
     featured: false,
-    color: "from-sky-500/20 to-blue-500/20",
+    color: "from-green-500/20 to-emerald-500/20",
     num: "06",
   },
 ];
@@ -114,7 +115,7 @@ const FeaturedCard = ({ project }: { project: typeof projects[0] }) => {
         transform: `perspective(1200px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
         transition: "transform 0.2s ease-out",
       }}
-      className="reveal-scale group relative glass-card overflow-hidden rounded-3xl glow-hover"
+      className="reveal-scale group relative overflow-hidden rounded-3xl glow-hover border border-border" style={{background: "hsl(var(--card))"}}
       data-delay="0"
     >
       <div className="grid md:grid-cols-2 min-h-[380px]">
@@ -193,7 +194,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
         transform: `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
         transition: "transform 0.15s ease-out",
       }}
-      className="reveal-scale glass-card overflow-hidden group glow-hover rounded-2xl relative"
+      className="reveal-scale overflow-hidden group glow-hover rounded-2xl relative border border-border" style={{background: "hsl(var(--card))"}}
       data-delay={String(index * 80)}
     >
       {/* Number */}

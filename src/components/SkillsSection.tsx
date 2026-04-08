@@ -1,57 +1,44 @@
 import { useEffect, useRef, useState } from "react";
 
-// Tech icons as SVG paths / emojis
+// Real tech icons using devicons/simpleicons via CDN img tags
 const techStack = [
-  // Core languages
-  { name: "Python", icon: "🐍", level: 92, category: "Language", color: "from-yellow-400 to-blue-500" },
-  { name: "Oracle PL/SQL", icon: "🔶", level: 85, category: "Database", color: "from-orange-400 to-red-500" },
-  { name: "JavaScript", icon: "⚡", level: 78, category: "Language", color: "from-yellow-300 to-yellow-500" },
-  { name: "TypeScript", icon: "📘", level: 75, category: "Language", color: "from-blue-400 to-blue-600" },
-
-  // Backend frameworks
-  { name: "Django", icon: "🌿", level: 90, category: "Backend", color: "from-green-600 to-emerald-500" },
-  { name: "FastAPI", icon: "🚀", level: 86, category: "Backend", color: "from-teal-400 to-cyan-500" },
-  { name: "REST API", icon: "🔌", level: 88, category: "Backend", color: "from-violet-400 to-purple-600" },
-  { name: "WebSocket", icon: "🔄", level: 72, category: "Backend", color: "from-cyan-400 to-blue-500" },
-
-  // Frontend
-  { name: "Angular", icon: "🅰️", level: 78, category: "Frontend", color: "from-red-500 to-pink-500" },
-  { name: "Tailwind CSS", icon: "🎨", level: 88, category: "Frontend", color: "from-sky-400 to-cyan-400" },
-  { name: "HTML / CSS", icon: "🖥️", level: 90, category: "Frontend", color: "from-orange-400 to-orange-500" },
-
-  // Databases
-  { name: "PostgreSQL", icon: "🐘", level: 82, category: "Database", color: "from-blue-500 to-indigo-500" },
-  { name: "Oracle DB", icon: "🔷", level: 80, category: "Database", color: "from-red-400 to-orange-400" },
-  { name: "MySQL", icon: "🐬", level: 75, category: "Database", color: "from-blue-400 to-blue-600" },
-
-  // DevOps & Cloud
-  { name: "Docker", icon: "🐳", level: 73, category: "DevOps", color: "from-blue-400 to-sky-500" },
-  { name: "AWS", icon: "☁️", level: 60, category: "Cloud", color: "from-orange-400 to-amber-500" },
-  { name: "DigitalOcean", icon: "🌊", level: 65, category: "Cloud", color: "from-blue-400 to-blue-600" },
-  { name: "Linux", icon: "🐧", level: 78, category: "DevOps", color: "from-yellow-400 to-orange-400" },
-  { name: "Git / GitHub", icon: "📦", level: 88, category: "DevOps", color: "from-gray-500 to-gray-700" },
-
-  // Specialties
-  { name: "Telegram Bots", icon: "🤖", level: 93, category: "Specialty", color: "from-blue-400 to-cyan-500" },
-  { name: "PL/SQL Procedures", icon: "⚙️", level: 83, category: "Database", color: "from-orange-500 to-red-500" },
-  { name: "PL/SQL Functions", icon: "🔧", level: 82, category: "Database", color: "from-amber-500 to-orange-500" },
+  { name: "Python",        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",         level: 92, category: "Language" },
+  { name: "Oracle PL/SQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg",          level: 85, category: "Database" },
+  { name: "JavaScript",    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",  level: 78, category: "Language" },
+  { name: "TypeScript",    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",  level: 75, category: "Language" },
+  { name: "Django",        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",              level: 90, category: "Backend" },
+  { name: "FastAPI",       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",         level: 86, category: "Backend" },
+  { name: "Angular",       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",    level: 78, category: "Frontend" },
+  { name: "HTML / CSS",    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",            level: 90, category: "Frontend" },
+  { name: "Tailwind CSS",  logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",level: 88, category: "Frontend" },
+  { name: "PostgreSQL",    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",  level: 82, category: "Database" },
+  { name: "MySQL",         logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",            level: 75, category: "Database" },
+  { name: "Docker",        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",          level: 73, category: "DevOps" },
+  { name: "Linux",         logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",            level: 78, category: "DevOps" },
+  { name: "Git",           logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",                level: 88, category: "DevOps" },
+  { name: "AWS",           logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg", level: 60, category: "Cloud" },
+  { name: "DigitalOcean",  logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg", level: 65, category: "Cloud" },
+  { name: "REST API",      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",        level: 88, category: "Backend" },
+  { name: "WebSocket",     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",          level: 72, category: "Backend" },
+  { name: "Telegram Bot",  logo: "https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg",                  level: 93, category: "Specialty" },
+  { name: "PL/SQL Proc.",  logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg",          level: 83, category: "Database" },
+  { name: "GitHub",        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",          level: 88, category: "DevOps" },
 ];
 
 const categoryFilters = ["Barchasi", "Language", "Backend", "Frontend", "Database", "DevOps", "Cloud", "Specialty"];
 
-const categoryColors: Record<string, string> = {
-  Language: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
-  Backend: "bg-green-500/10 text-green-500 border-green-500/20",
-  Frontend: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-  Database: "bg-orange-500/10 text-orange-500 border-orange-500/20",
-  DevOps: "bg-gray-500/10 text-gray-400 border-gray-500/20",
-  Cloud: "bg-sky-500/10 text-sky-400 border-sky-500/20",
-  Specialty: "bg-violet-500/10 text-violet-400 border-violet-500/20",
+const categoryStyle: Record<string, string> = {
+  Language:  "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border-yellow-500/20",
+  Backend:   "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20",
+  Frontend:  "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20",
+  Database:  "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20",
+  DevOps:    "bg-gray-500/10 text-gray-500 dark:text-gray-400 border-gray-500/20",
+  Cloud:     "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20",
+  Specialty: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20",
 };
 
-// Animated bar card
 const SkillCard = ({
-  name, icon, level, category, color, delay
+  name, logo, level, category, delay,
 }: typeof techStack[0] & { delay: number }) => {
   const [width, setWidth] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -67,7 +54,7 @@ const SkillCard = ({
           observer.disconnect();
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -76,26 +63,40 @@ const SkillCard = ({
   return (
     <div
       ref={ref}
-      className={`group glass-card p-4 rounded-xl hover:scale-[1.03] transition-all duration-400 glow-hover relative overflow-hidden ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-      style={{ transition: "opacity 0.5s ease, transform 0.5s ease" }}
+      className="group glass-card p-4 rounded-xl hover:scale-[1.03] transition-all duration-300 glow-hover"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(12px)",
+        transition: `opacity 0.5s ease ${delay}ms, transform 0.5s ease ${delay}ms, box-shadow 0.3s ease, scale 0.3s ease`,
+      }}
     >
-      <div className={`absolute inset-0 bg-gradient-to-br ${color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <span className="text-xl">{icon}</span>
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center">
+            <img
+              src={logo}
+              alt={name}
+              className="w-6 h-6 object-contain"
+              loading="lazy"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+            />
+          </div>
           <span className="text-sm font-medium text-foreground">{name}</span>
         </div>
-        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${categoryColors[category] || "bg-primary/10 text-primary border-primary/20"}`}>
+        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${categoryStyle[category] || ""}`}>
           {category}
         </span>
       </div>
       <div className="flex items-center gap-3">
         <div className="flex-1 h-1.5 bg-border rounded-full overflow-hidden">
           <div
-            className="h-full rounded-full transition-all duration-1000 ease-out"
+            className="h-full rounded-full"
             style={{
               width: `${width}%`,
-              background: `linear-gradient(90deg, hsl(var(--glow)), hsl(var(--glow-accent)))`,
+              background: "linear-gradient(90deg, hsl(var(--glow)), hsl(var(--glow-accent)))",
+              transition: "width 1s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           />
         </div>
@@ -112,14 +113,11 @@ const SkillsSection = () => {
     ? techStack
     : techStack.filter((s) => s.category === activeFilter);
 
-  // Highlight top skills
   const topSkills = [...techStack].sort((a, b) => b.level - a.level).slice(0, 5);
 
   return (
     <section className="py-24 md:py-32 px-6 border-t border-border">
       <div className="max-w-6xl mx-auto">
-
-        {/* Header */}
         <div className="text-center mb-14">
           <p className="reveal font-mono text-xs text-primary mb-3 tracking-widest uppercase">Texnik bilimlar</p>
           <h2 className="reveal text-3xl md:text-5xl font-bold mb-4" data-delay="100">
@@ -130,18 +128,20 @@ const SkillsSection = () => {
           </p>
         </div>
 
-        {/* Top 5 highlight */}
+        {/* Top 5 */}
         <div className="reveal grid grid-cols-5 gap-3 mb-12" data-delay="100">
           {topSkills.map((s) => (
-            <div key={s.name} className="glass-card p-3 rounded-xl text-center group hover:scale-105 transition-all duration-300">
-              <span className="text-2xl block mb-1">{s.icon}</span>
+            <div key={s.name} className="glass-card p-3 rounded-xl text-center group hover:scale-105 transition-all duration-300 glow-hover">
+              <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                <img src={s.logo} alt={s.name} className="w-8 h-8 object-contain" loading="lazy" />
+              </div>
               <p className="text-[11px] font-medium text-foreground truncate">{s.name}</p>
-              <p className="text-xs font-mono gradient-text font-bold mt-1">{s.level}%</p>
+              <p className="text-xs font-mono gradient-text font-bold mt-0.5">{s.level}%</p>
             </div>
           ))}
         </div>
 
-        {/* Filter pills */}
+        {/* Filters */}
         <div className="reveal flex flex-wrap gap-2 mb-8" data-delay="150">
           {categoryFilters.map((cat) => (
             <button
@@ -164,21 +164,26 @@ const SkillsSection = () => {
         {/* Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {filtered.map((skill, i) => (
-            <SkillCard key={skill.name} {...skill} delay={i * 60} />
+            <SkillCard key={skill.name} {...skill} delay={i * 50} />
           ))}
         </div>
 
-        {/* Oracle special callout */}
-        <div className="reveal mt-10 glass-card p-6 rounded-2xl border border-orange-500/20 glow-hover" data-delay="200">
+        {/* Oracle callout */}
+        <div className="reveal mt-10 p-6 rounded-2xl border border-orange-500/20 glow-hover relative overflow-hidden" data-delay="200"
+          style={{ background: "hsl(var(--glass-bg))", backdropFilter: "blur(16px)" }}>
           <div className="flex items-start gap-4">
-            <span className="text-3xl">🔶</span>
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg"
+              alt="Oracle"
+              className="w-10 h-10 object-contain flex-shrink-0 mt-1"
+            />
             <div>
               <h3 className="font-bold text-foreground mb-1">Oracle PL/SQL — Maxsus ko'nikma</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Stored Procedures, Functions, Triggers</strong> va murakkab 
-                <strong className="text-foreground"> PL/SQL bloklari</strong> yozish. Ma'lumotlar bazasi 
-                optimizatsiyasi, <strong className="text-foreground">Cursor</strong>lar va 
-                <strong className="text-foreground"> Exception handling</strong> bilan ishlash tajribasi.
+                <strong className="text-foreground">Stored Procedures, Functions, Triggers</strong> va murakkab{" "}
+                <strong className="text-foreground">PL/SQL bloklari</strong> yozish. Ma'lumotlar bazasi
+                optimizatsiyasi, <strong className="text-foreground">Cursors</strong> va{" "}
+                <strong className="text-foreground">Exception handling</strong> bilan ishlash tajribasi.
               </p>
               <div className="flex flex-wrap gap-2 mt-3">
                 {["Stored Procedures", "Functions", "Triggers", "Cursors", "Packages", "Exception Handling"].map(t => (
@@ -188,7 +193,6 @@ const SkillsSection = () => {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
