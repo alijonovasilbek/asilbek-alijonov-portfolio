@@ -65,8 +65,8 @@ const projects = [
     num: "04",
   },
   {
-    title: "Cleaning Service",
-    description: "Tozalash xizmati platformasi — xizmatlar, narxlar, onlayn buyurtma va admin panel.",
+    title: "VooyObed",
+    description: "Onlayn ovqat yetkazib berish platformasi — restoranlar, menyu, buyurtma va yetkazib berish tizimi.",
     image: projectCleaning,
     tech: ["Django", "Bootstrap", "SQLite"],
     live: "https://vooyobed.com",
@@ -207,6 +207,8 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
           alt={project.title}
           className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
           loading="lazy"
+        decoding="async"
+        style={{ imageRendering: "auto" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/20 to-transparent" />
         <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />

@@ -8,6 +8,7 @@ import SkillsSection from "@/components/SkillsSection";
 import GitHubStatsSection from "@/components/GitHubStatsSection";
 import AchievementsSection from "@/components/AchievementsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import CTASection from "@/components/CTASection";
 
 import projectCrm from "@/assets/project-crm.png";
 import projectOlou from "@/assets/project-olou.jpg";
@@ -44,7 +45,7 @@ const Index = () => {
         
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="reveal" data-delay="0">
-            <div className="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-8 text-xs font-mono text-muted-foreground">
+            <div className="inline-flex items-center gap-2 glass-card px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-6 sm:mb-8 text-[10px] sm:text-xs font-mono text-muted-foreground whitespace-nowrap">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Hozir ishlashga tayyor
             </div>
@@ -179,12 +180,13 @@ const Index = () => {
                 className="reveal-scale group glass-card overflow-hidden hover:scale-[1.02] transition-all duration-500 glow-hover"
                 data-delay={String(i * 150)}
               >
-                <div className="relative overflow-hidden aspect-[16/10]">
+                <div className="relative overflow-hidden aspect-[16/9]">
                   <img
                     src={p.image}
                     alt={p.title}
                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
+                    decoding="async"
                     width={1280}
                     height={800}
                   />
@@ -221,25 +223,8 @@ const Index = () => {
 
       {/* TESTIMONIALS */}
       <TestimonialsSection />
-
       {/* CTA */}
-      <section className="py-24 md:py-32 px-6">
-        <div className="reveal-scale max-w-3xl mx-auto text-center glass-card p-12 md:p-16 rounded-3xl glow relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 gradient-bg" />
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Loyiha g'oyangiz bormi?
-          </h2>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-            Keling, birga ajoyib narsa yaratamiz. Men bilan bog'laning va g'oyangizni haqiqatga aylantiring.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 gradient-bg text-primary-foreground px-8 py-3.5 rounded-full font-semibold text-sm hover:scale-105 transition-all duration-300 glow"
-          >
-            Bog'lanish <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
+      <CTASection />
 
       <Footer />
     </div>
