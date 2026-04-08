@@ -129,9 +129,9 @@ const SkillsSection = () => {
         </div>
 
         {/* Top 5 */}
-        <div className="reveal grid grid-cols-5 gap-3 mb-12" data-delay="100">
+        <div className="reveal flex gap-2 mb-12 overflow-x-auto pb-2 scrollbar-none" data-delay="100">
           {topSkills.map((s) => (
-            <div key={s.name} className="glass-card p-3 rounded-xl text-center group hover:scale-105 transition-all duration-300 glow-hover">
+            <div key={s.name} className="glass-card p-3 rounded-xl text-center group hover:scale-105 transition-all duration-300 glow-hover flex-shrink-0 w-[18%] min-w-[70px]">
               <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
                 <img src={s.logo} alt={s.name} className="w-8 h-8 object-contain" loading="lazy" />
               </div>
@@ -142,7 +142,7 @@ const SkillsSection = () => {
         </div>
 
         {/* Filters */}
-        <div className="reveal flex flex-wrap gap-2 mb-8" data-delay="150">
+        <div className="reveal flex flex-wrap gap-1.5 mb-8" data-delay="150">
           {categoryFilters.map((cat) => (
             <button
               key={cat}

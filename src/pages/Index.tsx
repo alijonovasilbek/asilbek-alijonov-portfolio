@@ -43,9 +43,9 @@ const Index = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
         <div className="grid-pattern absolute inset-0 opacity-30" />
         
-        <div className="relative max-w-4xl mx-auto text-center">
+        <div className="relative max-w-4xl mx-auto text-center pt-20 md:pt-0">
           <div className="reveal" data-delay="0">
-            <div className="inline-flex items-center gap-2 glass-card px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-6 sm:mb-8 text-[10px] sm:text-xs font-mono text-muted-foreground whitespace-nowrap">
+            <div className="inline-flex items-center gap-2 border border-border bg-background/80 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-6 sm:mb-8 text-[10px] sm:text-xs font-mono text-muted-foreground whitespace-nowrap">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Hozir ishlashga tayyor
             </div>
@@ -190,7 +190,7 @@ const Index = () => {
                     width={1280}
                     height={800}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-60" />
+
                 </div>
                 <div className="p-5">
                   <h3 className="font-bold text-lg mb-3 group-hover:text-primary transition-colors">{p.title}</h3>
