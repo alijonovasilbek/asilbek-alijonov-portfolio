@@ -13,6 +13,7 @@ import projectOlou from "@/assets/project-olou.jpg";
 import projectTaxi from "@/assets/project-taxi.jpg";
 import projectWebapp from "@/assets/project-webapp.jpg";
 import projectBonAppetit from "@/assets/project-bonappetit.png";
+import projectBunyodkorFk from "@/assets/project-bunyodkor-fk.png";
 
 const categories = ["Barchasi", "Web App", "E-commerce", "Bot", "Website"];
 
@@ -30,9 +31,9 @@ const projects = [
     num: "01",
   },
   {
-    title: "Bunyodkor CIMS",
+    title: "Bunyodkor FK",
     description: "Kurs boshqaruv tizimi — o'quvchilar, to'lovlar, davomat, hisobotlar va moliyaviy tahlil. 1000+ foydalanuvchi.",
-    image: projectBunyodkor,
+    image: projectBunyodkorFk,
     tech: ["Django", "FastAPI", "PostgreSQL", "Tailwind"],
     live: "#",
     github: "#",
